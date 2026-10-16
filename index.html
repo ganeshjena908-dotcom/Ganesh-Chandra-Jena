@@ -30,7 +30,7 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -44,9 +44,9 @@ mono: ['"JetBrains Mono"', 'monospace'],
 },
 colors: {
 neuro: {
-950: '#030712',
-900: '#081020',
-800: '#0f1b33',
+950: '#020617',
+900: '#070e20',
+800: '#0f1b35',
 700: '#192b4d',
 500: '#0ea5e9',
 400: '#38bdf8',
@@ -58,50 +58,61 @@ teal: '#14b8a6'
 };
 </script>
 <style>
-body {
-background-color: #030712;
-color: #f8fafc;
+* {
+box-sizing: border-box;
+}
+html, body {
+margin: 0;
+padding: 0;
+background-color: #020617 !important;
+color: #f8fafc !important;
+font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 overflow-x: hidden;
 }
 
-/* Subtle Clinical Grid Pattern */
-.bg-clinical-grid {
-background-size: 36px 36px;
+/* Ambient Medical Grid & Spotlight */
+.bg-clinical-mesh {
+background-color: #020617;
 background-image:
-linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+radial-gradient(at 15% 15%, rgba(14, 165, 233, 0.16) 0px, transparent 45%),
+radial-gradient(at 85% 25%, rgba(20, 184, 166, 0.12) 0px, transparent 45%),
+linear-gradient(to right, rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(56, 189, 248, 0.045) 1px, transparent 1px);
+background-size: 100% 100%, 100% 100%, 34px 34px, 34px 34px;
 }
 
-/* Modern High-Contrast Gradient Surface (Hardware-Accelerated & Glitch-Free) */
+/* Ultra-Clean Modern Card */
 .modern-card {
-background: linear-gradient(155deg, #0d182e 0%, #070e1c 100%);
-border: 1px solid rgba(56, 189, 248, 0.18);
+background: linear-gradient(155deg, #0d182f 0%, #060c1a 100%);
+border: 1px solid rgba(56, 189, 248, 0.22);
+border-radius: 1.25rem;
 box-shadow:
-inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
-0 14px 34px -10px rgba(0, 0, 0, 0.75);
+inset 0 1px 0 0 rgba(255, 255, 255, 0.09),
+0 16px 36px -10px rgba(0, 0, 0, 0.8);
 transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modern-card:hover {
-border-color: rgba(56, 189, 248, 0.45);
+border-color: rgba(56, 189, 248, 0.55);
 transform: translateY(-4px);
 box-shadow:
-inset 0 1px 0 0 rgba(56, 189, 248, 0.25),
-0 20px 40px -12px rgba(14, 165, 233, 0.18);
+inset 0 1px 0 0 rgba(56, 189, 248, 0.3),
+0 22px 44px -12px rgba(14, 165, 233, 0.22);
 }
 
-/* Featured Profile Card with Glowing Top Accent */
+/* Executive Featured Card */
 .featured-profile-card {
-background: linear-gradient(165deg, #101f3c 0%, #081121 100%);
-border: 1px solid rgba(56, 189, 248, 0.32);
+background: linear-gradient(165deg, #112242 0%, #071022 100%);
+border: 1px solid rgba(56, 189, 248, 0.38);
+border-radius: 1.5rem;
 box-shadow:
-inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
-0 25px 50px -12px rgba(2, 6, 23, 0.9),
-0 0 40px -10px rgba(14, 165, 233, 0.22);
+inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+0 25px 50px -12px rgba(2, 6, 23, 0.95),
+0 0 45px -10px rgba(14, 165, 233, 0.28);
 }
 
 .text-gradient {
-background: linear-gradient(135deg, #ffffff 0%, #bae6fd 50%, #38bdf8 100%);
+background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 55%, #38bdf8 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 }
@@ -114,26 +125,26 @@ background: linear-gradient(90deg, #38bdf8 0%, #2dd4bf 100%);
 
 .btn-primary-glow {
 background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-box-shadow: 0 8px 25px -4px rgba(14, 165, 233, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+box-shadow: 0 8px 25px -4px rgba(14, 165, 233, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
 transition: all 0.25s ease;
 }
 
 .btn-primary-glow:hover {
 background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
-box-shadow: 0 12px 30px -4px rgba(56, 189, 248, 0.65);
+box-shadow: 0 12px 30px -4px rgba(56, 189, 248, 0.7);
 transform: translateY(-2px);
 }
 
 .badge-pill {
-background: rgba(14, 165, 233, 0.1);
-border: 1px solid rgba(56, 189, 248, 0.25);
+background: rgba(14, 165, 233, 0.12);
+border: 1px solid rgba(56, 189, 248, 0.3);
 }
 </style>
 </head>
 <body class="bg-neuro-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
 
 <!-- Top Navigation -->
-<header class="sticky top-0 z-50 bg-[#050b18]/95 border-b border-slate-800/80">
+<header class="sticky top-0 z-50 bg-[#040917]/95 backdrop-blur-md border-b border-slate-800/80">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 <a href="#" class="flex items-center gap-3.5 group">
 <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/25 to-teal-500/15 border border-cyan-400/40 flex items-center justify-center text-cyan-400 shadow-lg shadow-cyan-500/10 group-hover:border-cyan-300 transition">
@@ -157,7 +168,7 @@ Contact Clinic
 </nav>
 
 <!-- Mobile Quick Action -->
-<a href="#contact" class="md:hidden px-3.5 py-2 rounded-lg bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-semibold">
+<a href="#contact" class="md:hidden px-3.5 py-2 rounded-lg bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 text-xs font-semibold">
 Contact
 </a>
 </div>
@@ -165,16 +176,11 @@ Contact
 
 <main>
 <!-- Hero Section -->
-<section class="relative pt-12 pb-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-clinical-grid border-b border-slate-800/70">
+<section class="relative pt-12 pb-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-clinical-mesh border-b border-slate-800/70">
 <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
 
 <!-- Left Column: Executive Introduction -->
 <div class="lg:col-span-7 space-y-7">
-<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full badge-pill text-cyan-300 text-xs font-semibold tracking-wide">
-<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-NEURO POLYCLINIC • BARGARH, ODISHA
-</div>
-
 <div class="space-y-3">
 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gradient leading-[1.12]">
 Ganesh Chandra Jena
@@ -188,7 +194,7 @@ Neuro Medical Technologist & Electrophysiology Specialist
 Delivering high-precision clinical neuro-diagnostics, artifact-free waveform acquisition, and structured electrodiagnostic reporting at <strong class="text-white font-semibold">Neuro Polyclinic, Bargarh</strong>. Experienced in personally performing Nerve Conduction Studies (NCS), Digital EEG, Repetitive Nerve Stimulation (RNST), and Evoked Potentials (VEP & BERA).
 </p>
 
-<div class="flex flex-wrap gap-4 pt-2">
+<div class="flex flex-wrap gap-4 pt-1">
 <a href="#investigations" class="px-7 py-4 rounded-xl btn-primary-glow text-white font-bold text-sm inline-flex items-center gap-2.5">
 <i data-lucide="activity" class="w-4 h-4"></i>
 Explore Diagnostic Studies
@@ -200,7 +206,7 @@ View Clinical Profile
 </div>
 
 <!-- Modern KPI Stat Strip -->
-<div class="grid grid-cols-3 gap-3 sm:gap-5 pt-6">
+<div class="grid grid-cols-3 gap-3 sm:gap-5 pt-4">
 <div class="modern-card p-4 rounded-xl">
 <div class="text-xs font-mono uppercase tracking-wider text-cyan-400">Core Modality</div>
 <div class="text-lg sm:text-xl font-extrabold text-white mt-1">NCS & EEG</div>
@@ -242,29 +248,29 @@ View Clinical Profile
 
 <!-- Structured Metadata Grid -->
 <div class="grid grid-cols-1 gap-2.5 text-sm">
-<div class="p-3 rounded-xl bg-[#070f20] border border-slate-800/80 flex items-center justify-between">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-slate-800/80 flex items-center justify-between">
 <span class="text-slate-400 text-xs uppercase font-mono">Practitioner</span>
 <span class="font-bold text-white">Ganesh Chandra Jena</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-slate-800/80 flex items-center justify-between">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-slate-800/80 flex items-center justify-between">
 <span class="text-slate-400 text-xs uppercase font-mono">Designation</span>
 <span class="font-bold text-cyan-400">Neuro Medical Technologist</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-slate-800/80 flex items-center justify-between">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-slate-800/80 flex items-center justify-between">
 <span class="text-slate-400 text-xs uppercase font-mono">Clinical Center</span>
 <span class="font-bold text-white">Neuro Polyclinic, Bargarh</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-slate-800/80 flex items-center justify-between">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-slate-800/80 flex items-center justify-between">
 <span class="text-slate-400 text-xs uppercase font-mono">Region</span>
 <span class="font-semibold text-slate-200">Bargarh, Odisha, India</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-slate-800/80 flex items-center justify-between">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-slate-800/80 flex items-center justify-between">
 <span class="text-slate-400 text-xs uppercase font-mono">Equipment</span>
 <span class="font-bold text-teal-400">Allengers & RMS Machines</span>
 </div>
 </div>
 
-<!-- Core Specializations Badges (100% Neuro-Diagnostic, No Holter) -->
+<!-- Core Specializations Badges (100% Neuro-Diagnostic, No Holter, No Blink Reflex) -->
 <div class="space-y-3 pt-1">
 <div class="flex items-center justify-between">
 <h3 class="text-xs font-mono uppercase tracking-wider text-slate-400">
@@ -274,27 +280,27 @@ Core Neuro Specializations
 </div>
 
 <div class="grid grid-cols-2 gap-2.5 text-xs font-semibold">
-<div class="p-3 rounded-xl bg-[#070f20] border border-cyan-500/25 flex items-center gap-2.5 text-slate-100">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-cyan-500/25 flex items-center gap-2.5 text-slate-100">
 <i data-lucide="zap" class="w-4 h-4 text-cyan-400 shrink-0"></i>
 <span>Motor & Sensory NCS</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-teal-500/25 flex items-center gap-2.5 text-slate-100">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-teal-500/25 flex items-center gap-2.5 text-slate-100">
 <i data-lucide="brain" class="w-4 h-4 text-teal-400 shrink-0"></i>
 <span>Digital EEG Studies</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-sky-500/25 flex items-center gap-2.5 text-slate-100">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-sky-500/25 flex items-center gap-2.5 text-slate-100">
 <i data-lucide="activity" class="w-4 h-4 text-sky-400 shrink-0"></i>
 <span>3Hz RNST Protocol</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-indigo-500/25 flex items-center gap-2.5 text-slate-100">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-indigo-500/25 flex items-center gap-2.5 text-slate-100">
 <i data-lucide="waves" class="w-4 h-4 text-indigo-400 shrink-0"></i>
 <span>F-Wave & H-Reflex</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-amber-500/25 flex items-center gap-2.5 text-slate-100">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-amber-500/25 flex items-center gap-2.5 text-slate-100">
 <i data-lucide="eye" class="w-4 h-4 text-amber-400 shrink-0"></i>
 <span>Pattern VEP Study</span>
 </div>
-<div class="p-3 rounded-xl bg-[#070f20] border border-purple-500/25 flex items-center gap-2.5 text-slate-100">
+<div class="p-3 rounded-xl bg-[#060d1d] border border-purple-500/25 flex items-center gap-2.5 text-slate-100">
 <i data-lucide="ear" class="w-4 h-4 text-purple-400 shrink-0"></i>
 <span>BERA / BAEP Test</span>
 </div>
@@ -307,7 +313,7 @@ Core Neuro Specializations
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#050b16] border-b border-slate-800/80">
+<section id="about" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#040916] border-b border-slate-800/80">
 <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
 <div class="lg:col-span-6 space-y-6">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-xs font-mono uppercase tracking-widest">
@@ -514,7 +520,7 @@ Acoustic click-evoked auditory brainstem testing analyzing Waves I–V absolute 
 </section>
 
 <!-- Diagnostic Systems & Technical Protocol -->
-<section id="systems" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#050b16] border-t border-slate-800/80">
+<section id="systems" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#040916] border-t border-slate-800/80">
 <div class="max-w-7xl mx-auto space-y-12">
 <div class="text-center max-w-3xl mx-auto space-y-3">
 <div class="text-cyan-400 text-xs font-mono uppercase tracking-widest">Hardware & Technical Standards</div>
@@ -555,8 +561,8 @@ Precise cursor marking of onset and peak latencies, supramaximal stimulation ver
 </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-clinical-grid">
+<!-- Contact Section (With Clinic Number 9178006016 Added) -->
+<section id="contact" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-clinical-mesh">
 <div class="max-w-4xl mx-auto featured-profile-card rounded-3xl p-8 sm:p-12 text-center space-y-8">
 <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/25 to-teal-500/15 border border-cyan-400/40 flex items-center justify-center text-cyan-300 mx-auto shadow-lg shadow-cyan-500/15">
 <i data-lucide="hospital" class="w-8 h-8"></i>
@@ -570,22 +576,29 @@ For neuro-diagnostic procedure inquiries, physician referrals, or clinical repor
 </p>
 </div>
 
-<div class="grid sm:grid-cols-3 gap-4 text-left">
-<div class="p-5 rounded-2xl bg-[#070f20] border border-slate-800/90 flex items-start gap-3.5">
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+<div class="p-5 rounded-2xl bg-[#060d1d] border border-slate-800/90 flex items-start gap-3.5">
 <i data-lucide="user-check" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5"></i>
 <div>
 <div class="text-[11px] font-mono uppercase text-slate-400">Technologist</div>
 <div class="font-bold text-white text-sm mt-1">Ganesh Chandra Jena</div>
 </div>
 </div>
-<div class="p-5 rounded-2xl bg-[#070f20] border border-slate-800/90 flex items-start gap-3.5">
+<div class="p-5 rounded-2xl bg-[#060d1d] border border-slate-800/90 flex items-start gap-3.5">
 <i data-lucide="building-2" class="w-5 h-5 text-teal-400 shrink-0 mt-0.5"></i>
 <div>
 <div class="text-[11px] font-mono uppercase text-slate-400">Clinical Center</div>
 <div class="font-bold text-cyan-400 text-sm mt-1">Neuro Polyclinic</div>
 </div>
 </div>
-<div class="p-5 rounded-2xl bg-[#070f20] border border-slate-800/90 flex items-start gap-3.5">
+<div class="p-5 rounded-2xl bg-[#060d1d] border border-slate-800/90 flex items-start gap-3.5">
+<i data-lucide="phone" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+<div>
+<div class="text-[11px] font-mono uppercase text-slate-400">Clinic Number</div>
+<a href="tel:9178006016" class="font-bold text-emerald-400 hover:text-cyan-300 text-sm mt-1 block font-mono">9178006016</a>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-[#060d1d] border border-slate-800/90 flex items-start gap-3.5">
 <i data-lucide="map-pin" class="w-5 h-5 text-sky-400 shrink-0 mt-0.5"></i>
 <div>
 <div class="text-[11px] font-mono uppercase text-slate-400">Location</div>
@@ -598,7 +611,7 @@ For neuro-diagnostic procedure inquiries, physician referrals, or clinical repor
 </main>
 
 <!-- Footer -->
-<footer class="py-8 bg-[#02050d] border-t border-slate-800/80 text-center text-xs sm:text-sm text-slate-400 px-4">
+<footer class="py-8 bg-[#01040b] border-t border-slate-800/80 text-center text-xs sm:text-sm text-slate-400 px-4">
 <p>© 2026 <strong class="text-slate-200">Ganesh Chandra Jena</strong> | Neuro Medical Technologist — Neuro Polyclinic, Bargarh, Odisha.</p>
 </footer>
 
