@@ -139,6 +139,17 @@ transform: translateY(-2px);
 background: rgba(14, 165, 233, 0.12);
 border: 1px solid rgba(56, 189, 248, 0.3);
 }
+
+/* Waveform Display Box Inside Cards */
+.wave-screen {
+background-color: #030712;
+border: 1px solid rgba(56, 189, 248, 0.25);
+border-radius: 0.75rem;
+position: relative;
+overflow: hidden;
+height: 72px;
+width: 100%;
+}
 </style>
 </head>
 <body class="bg-neuro-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
@@ -270,7 +281,7 @@ View Clinical Profile
 </div>
 </div>
 
-<!-- Core Specializations Badges (100% Neuro-Diagnostic, No Holter, No Blink Reflex) -->
+<!-- Core Specializations Badges -->
 <div class="space-y-3 pt-1">
 <div class="flex items-center justify-between">
 <h3 class="text-xs font-mono uppercase tracking-wider text-slate-400">
@@ -380,12 +391,12 @@ Comprehensive distal latency, amplitude, and conduction velocity (NCV) tables pa
 </div>
 </section>
 
-<!-- Diagnostic Investigations Section (Pure Neuro-Diagnostics: No Holter, No Blink Reflex) -->
+<!-- Diagnostic Investigations Section with Live Canvas Waveforms -->
 <section id="investigations" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
 <div class="max-w-7xl mx-auto space-y-14">
 <div class="text-center max-w-3xl mx-auto space-y-4">
 <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full badge-pill text-cyan-400 text-xs font-mono uppercase tracking-widest">
-Diagnostic Portfolio
+Diagnostic Portfolio & Live Traces
 </div>
 <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
 Neuro-Diagnostic Investigations
@@ -396,125 +407,199 @@ Comprehensive electrodiagnostic procedures conducted personally at Neuro Polycli
 </div>
 
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
 <!-- 1. Motor & Sensory NCS -->
-<div class="modern-card rounded-2xl p-7 flex flex-col justify-between space-y-5">
-<div class="space-y-4">
+<div class="modern-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+<div class="space-y-3">
 <div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
-<i data-lucide="zap" class="w-6 h-6"></i>
+<div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+<i data-lucide="zap" class="w-5 h-5"></i>
 </div>
 <span class="text-xs font-mono text-cyan-400/80 bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-500/20">01 / NCV</span>
 </div>
-<h3 class="text-xl font-bold text-white">Nerve Conduction Studies (NCS)</h3>
-<p class="text-slate-300 text-sm leading-relaxed">
-Evaluation of peripheral motor and sensory nerves (Median, Ulnar, Radial, Common Peroneal, Tibial, and Sural nerves) to assess peripheral neuropathy, carpal tunnel syndrome, and axonal or demyelinating lesions.
+<h3 class="text-lg font-bold text-white">Nerve Conduction Studies (NCS)</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+Evaluation of peripheral motor and sensory nerves (Median, Ulnar, Sural) to assess neuropathy and carpal tunnel syndrome.
 </p>
 </div>
-<div class="pt-3 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs font-mono text-cyan-300">
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">MNCS & SNCS</span>
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">CMAP / SNAP</span>
+
+<!-- Waveform Canvas Display -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-[10px] font-mono text-cyan-400/80 px-1">
+<span>CMAP TRACE</span>
+<span>2ms/div</span>
+</div>
+<div class="wave-screen">
+<canvas id="canvasNCS" class="w-full h-full"></canvas>
+</div>
+</div>
+
+<div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-1.5 text-[11px] font-mono text-cyan-300">
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">MNCS & SNCS</span>
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">CMAP/SNAP</span>
 </div>
 </div>
 
 <!-- 2. Late Responses: F-Wave & H-Reflex -->
-<div class="modern-card rounded-2xl p-7 flex flex-col justify-between space-y-5">
-<div class="space-y-4">
+<div class="modern-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+<div class="space-y-3">
 <div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400">
-<i data-lucide="waves" class="w-6 h-6"></i>
+<div class="w-10 h-10 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400">
+<i data-lucide="waves" class="w-5 h-5"></i>
 </div>
 <span class="text-xs font-mono text-teal-400/80 bg-teal-500/10 px-2.5 py-1 rounded-md border border-teal-500/20">02 / LATE</span>
 </div>
-<h3 class="text-xl font-bold text-white">F-Wave & H-Reflex Studies</h3>
-<p class="text-slate-300 text-sm leading-relaxed">
-Proximal nerve root and spinal cord segment conduction testing for cervical and lumbosacral radiculopathies, Guillain-Barré Syndrome (GBS), and early polyneuropathy evaluation.
+<h3 class="text-lg font-bold text-white">F-Wave & H-Reflex Studies</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+Proximal nerve root and spinal cord segment conduction testing for cervical and lumbosacral radiculopathies.
 </p>
 </div>
-<div class="pt-3 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs font-mono text-teal-300">
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">F-Min Latency</span>
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">Tibial H-Reflex</span>
+
+<!-- Waveform Canvas Display -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-[10px] font-mono text-teal-400/80 px-1">
+<span>F-WAVE TRACE</span>
+<span>5ms/div</span>
+</div>
+<div class="wave-screen">
+<canvas id="canvasFWave" class="w-full h-full"></canvas>
+</div>
+</div>
+
+<div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-1.5 text-[11px] font-mono text-teal-300">
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">F-Min Latency</span>
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">H-Reflex</span>
 </div>
 </div>
 
 <!-- 3. Electroencephalography (EEG) -->
-<div class="modern-card rounded-2xl p-7 flex flex-col justify-between space-y-5">
-<div class="space-y-4">
+<div class="modern-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+<div class="space-y-3">
 <div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400">
-<i data-lucide="brain" class="w-6 h-6"></i>
+<div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400">
+<i data-lucide="brain" class="w-5 h-5"></i>
 </div>
 <span class="text-xs font-mono text-sky-400/80 bg-sky-500/10 px-2.5 py-1 rounded-md border border-sky-500/20">03 / EEG</span>
 </div>
-<h3 class="text-xl font-bold text-white">Electroencephalography (EEG)</h3>
-<p class="text-slate-300 text-sm leading-relaxed">
-Awake and sleep digital EEG recordings for pediatric, adolescent, and adult patients with standard activation procedures (Hyperventilation & Photic Stimulation) and epileptiform waveform analysis.
+<h3 class="text-lg font-bold text-white">Electroencephalography (EEG)</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+Awake and sleep digital EEG recordings with 10-20 montage and epileptiform waveform analysis.
 </p>
 </div>
-<div class="pt-3 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs font-mono text-sky-300">
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">10-20 Montage</span>
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">Pediatric & Adult</span>
+
+<!-- Waveform Canvas Display -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-[10px] font-mono text-sky-400/80 px-1">
+<span>EEG RHYTHM (C3-P3)</span>
+<span>30Hz Notch</span>
+</div>
+<div class="wave-screen">
+<canvas id="canvasEEG" class="w-full h-full"></canvas>
+</div>
+</div>
+
+<div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-1.5 text-[11px] font-mono text-sky-300">
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">10-20 Montage</span>
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">50Hz Filter</span>
 </div>
 </div>
 
 <!-- 4. Repetitive Nerve Stimulation (RNST) -->
-<div class="modern-card rounded-2xl p-7 flex flex-col justify-between space-y-5">
-<div class="space-y-4">
+<div class="modern-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+<div class="space-y-3">
 <div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
-<i data-lucide="activity" class="w-6 h-6"></i>
+<div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+<i data-lucide="activity" class="w-5 h-5"></i>
 </div>
 <span class="text-xs font-mono text-indigo-400/80 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">04 / RNST</span>
 </div>
-<h3 class="text-xl font-bold text-white">Repetitive Nerve Stimulation (RNST)</h3>
-<p class="text-slate-300 text-sm leading-relaxed">
-Specialized low-frequency (3Hz) train stimulation protocols on distal and proximal muscles to evaluate decremental CMAP responses in neuromuscular junction disorders such as Myasthenia Gravis.
+<h3 class="text-lg font-bold text-white">Repetitive Nerve Stimulation</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+Specialized low-frequency (3Hz) train stimulation protocols for Myasthenia Gravis evaluation.
 </p>
 </div>
-<div class="pt-3 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs font-mono text-indigo-300">
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">3Hz Train</span>
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">Decrement Study</span>
+
+<!-- Waveform Canvas Display -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-[10px] font-mono text-indigo-400/80 px-1">
+<span>3Hz DECREMENT TRAIN</span>
+<span>Train 1-4</span>
+</div>
+<div class="wave-screen">
+<canvas id="canvasRNST" class="w-full h-full"></canvas>
+</div>
+</div>
+
+<div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-1.5 text-[11px] font-mono text-indigo-300">
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">3Hz Train</span>
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">Decrement</span>
 </div>
 </div>
 
 <!-- 5. Visual Evoked Potentials (VEP) -->
-<div class="modern-card rounded-2xl p-7 flex flex-col justify-between space-y-5">
-<div class="space-y-4">
+<div class="modern-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+<div class="space-y-3">
 <div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
-<i data-lucide="eye" class="w-6 h-6"></i>
+<div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
+<i data-lucide="eye" class="w-5 h-5"></i>
 </div>
 <span class="text-xs font-mono text-amber-400/80 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">05 / VEP</span>
 </div>
-<h3 class="text-xl font-bold text-white">Visual Evoked Potentials (VEP)</h3>
-<p class="text-slate-300 text-sm leading-relaxed">
-Pattern-reversal and flash VEP testing to measure P100 wave latency and amplitude for evaluating optic neuritis, demyelinating disease, and anterior visual pathway integrity.
+<h3 class="text-lg font-bold text-white">Visual Evoked Potentials (VEP)</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+Pattern-reversal testing measuring P100 wave latency for optic neuritis and pathway evaluation.
 </p>
 </div>
-<div class="pt-3 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs font-mono text-amber-300">
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">P100 Latency</span>
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">Optic Pathway</span>
+
+<!-- Waveform Canvas Display -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-[10px] font-mono text-amber-400/80 px-1">
+<span>VEP P100 PEAK</span>
+<span>50ms/div</span>
+</div>
+<div class="wave-screen">
+<canvas id="canvasVEP" class="w-full h-full"></canvas>
+</div>
+</div>
+
+<div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-1.5 text-[11px] font-mono text-amber-300">
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">P100 Latency</span>
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">Optic Pathway</span>
 </div>
 </div>
 
 <!-- 6. Brainstem Auditory Evoked Response (BERA / BAEP) -->
-<div class="modern-card rounded-2xl p-7 flex flex-col justify-between space-y-5">
-<div class="space-y-4">
+<div class="modern-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+<div class="space-y-3">
 <div class="flex items-center justify-between">
-<div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
-<i data-lucide="ear" class="w-6 h-6"></i>
+<div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
+<i data-lucide="ear" class="w-5 h-5"></i>
 </div>
 <span class="text-xs font-mono text-purple-400/80 bg-purple-500/10 px-2.5 py-1 rounded-md border border-purple-500/20">06 / BERA</span>
 </div>
-<h3 class="text-xl font-bold text-white">Brainstem Auditory Evoked Response (BERA)</h3>
-<p class="text-slate-300 text-sm leading-relaxed">
-Acoustic click-evoked auditory brainstem testing analyzing Waves I–V absolute and inter-peak latencies for pediatric hearing threshold estimation and retrocochlear pathway evaluation.
+<h3 class="text-lg font-bold text-white">Brainstem Auditory Evoked Response</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+Acoustic click-evoked testing analyzing Waves I–V absolute and inter-peak latencies.
 </p>
 </div>
-<div class="pt-3 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs font-mono text-purple-300">
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">Waves I–V</span>
-<span class="px-2.5 py-1 rounded-md bg-[#060c1a] border border-slate-800">BAEP / BERA</span>
+
+<!-- Waveform Canvas Display -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-[10px] font-mono text-purple-400/80 px-1">
+<span>BERA WAVES I–V</span>
+<span>1ms/div</span>
+</div>
+<div class="wave-screen">
+<canvas id="canvasBERA" class="w-full h-full"></canvas>
 </div>
 </div>
+
+<div class="pt-2 border-t border-slate-800/80 flex flex-wrap gap-1.5 text-[11px] font-mono text-purple-300">
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">Waves I–V</span>
+<span class="px-2 py-0.5 rounded bg-[#060c1a] border border-slate-800">BAEP / BERA</span>
+</div>
+</div>
+
 </div>
 </div>
 </section>
@@ -561,7 +646,7 @@ Precise cursor marking of onset and peak latencies, supramaximal stimulation ver
 </div>
 </section>
 
-<!-- Contact Section (With Clinic Number 9178006016 Added) -->
+<!-- Contact Section -->
 <section id="contact" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-clinical-mesh">
 <div class="max-w-4xl mx-auto featured-profile-card rounded-3xl p-8 sm:p-12 text-center space-y-8">
 <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/25 to-teal-500/15 border border-cyan-400/40 flex items-center justify-center text-cyan-300 mx-auto shadow-lg shadow-cyan-500/15">
@@ -617,6 +702,129 @@ For neuro-diagnostic procedure inquiries, physician referrals, or clinical repor
 
 <script>
 lucide.createIcons();
+
+// Setup Canvas Waveform Simulators for each Investigation Card
+function initWaveform(canvasId, drawFunc, strokeColor) {
+const canvas = document.getElementById(canvasId);
+if (!canvas) return;
+const ctx = canvas.getContext('2d');
+
+let step = 0;
+function resize() {
+canvas.width = canvas.parentElement.clientWidth;
+canvas.height = canvas.parentElement.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function render() {
+ctx.fillStyle = '#030712';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+// Draw faint grid lines
+ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+ctx.lineWidth = 1;
+for (let x = 0; x < canvas.width; x += 24) {
+ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+}
+for (let y = 0; y < canvas.height; y += 18) {
+ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+}
+
+// Draw wave
+ctx.beginPath();
+ctx.strokeStyle = strokeColor;
+ctx.lineWidth = 2;
+
+const centerY = canvas.height / 2;
+for (let x = 0; x < canvas.width; x++) {
+let y = drawFunc(x, step, canvas.height, centerY);
+if (x === 0) ctx.moveTo(x, y);
+else ctx.lineTo(x, y);
+}
+ctx.stroke();
+
+step += 1.5;
+requestAnimationFrame(render);
+}
+render();
+}
+
+// 1. NCS CMAP Waveform
+initWaveform('canvasNCS', (x, step, height, centerY) => {
+let phase = (x + step) % 250;
+let y = centerY + Math.sin((x + step) * 0.04) * 4;
+if (phase < 35) {
+let p = phase / 35;
+y -= Math.sin(p * Math.PI) * 22;
+} else if (phase >= 35 && phase < 55) {
+let p = (phase - 35) / 20;
+y += Math.sin(p * Math.PI) * 12;
+}
+return y;
+}, '#38bdf8');
+
+// 2. F-Wave Waveform
+initWaveform('canvasFWave', (x, step, height, centerY) => {
+let phase = (x + step * 0.8) % 300;
+let y = centerY + (Math.random() - 0.5) * 3;
+if (phase > 180 && phase < 220) {
+let p = (phase - 180) / 40;
+y -= Math.sin(p * Math.PI) * 18 * Math.sin(p * 4 * Math.PI);
+}
+return y;
+}, '#2dd4bf');
+
+// 3. EEG Rhythm Waveform
+initWaveform('canvasEEG', (x, step, height, centerY) => {
+let y = centerY + Math.sin((x + step) * 0.08) * 8 + Math.sin((x + step * 2) * 0.2) * 4;
+if (Math.floor((x + step) * 0.1) % 40 === 0) {
+y -= 16; // Spike artifact
+}
+return y;
+}, '#38bdf8');
+
+// 4. RNST 3Hz Decrement Waveform
+initWaveform('canvasRNST', (x, step, height, centerY) => {
+let phase = (x + step) % 220;
+let cycle = Math.floor((x + step) / 220);
+let damp = Math.max(0.4, 1 - (cycle % 5) * 0.12);
+let y = centerY;
+if (phase < 25) {
+let p = phase / 25;
+y -= Math.sin(p * Math.PI) * 20 * damp;
+}
+return y;
+}, '#818cf8');
+
+// 5. VEP P100 Waveform
+initWaveform('canvasVEP', (x, step, height, centerY) => {
+let phase = (x + step) % 280;
+let y = centerY + Math.sin((x + step) * 0.03) * 3;
+if (phase > 80 && phase < 140) {
+let p = (phase - 80) / 60;
+y += Math.sin(p * Math.PI) * 22; // N75
+} else if (phase >= 140 && phase < 210) {
+let p = (phase - 140) / 70;
+y -= Math.sin(p * Math.PI) * 28; // P100 sharp positive peak
+}
+return y;
+}, '#fbbf24');
+
+// 6. BERA Waves I-V
+initWaveform('canvasBERA', (x, step, height, centerY) => {
+let phase = (x + step) % 280;
+let y = centerY + (Math.random() - 0.5) * 2;
+// Simulated Waves I to V peaks
+let peaks = [40, 75, 110, 145, 185];
+peaks.forEach((pt, idx) => {
+if (phase > pt - 8 && phase < pt + 8) {
+let p = (phase - (pt - 8)) / 16;
+y -= Math.sin(p * Math.PI) * (12 + idx * 3);
+}
+});
+return y;
+}, '#c084fc');
 </script>
 </body>
 </html>
