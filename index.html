@@ -491,7 +491,7 @@ Awake and sleep digital EEG recordings with 10-20 montage and epileptiform wavef
 <div class="space-y-1.5 pt-1">
 <div class="flex justify-between items-center text-[10px] font-mono text-sky-400/80 px-1">
 <span>EEG RHYTHM (C3-P3)</span>
-<span>30Hz Notch</span>
+<span>50Hz Notch</span>
 </div>
 <div class="wave-screen">
 <canvas id="canvasEEG" class="w-full h-full"></canvas>
@@ -688,6 +688,10 @@ For neuro-diagnostic procedure inquiries, physician referrals, or clinical repor
 <div>
 <div class="text-[11px] font-mono uppercase text-slate-400">Location</div>
 <div class="font-bold text-white text-sm mt-1">Bargarh, Odisha</div>
+<a href="https://maps.app.goo.gl/MDQFKBJEqFN2azEW6?g_st=ic" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-mono text-sky-400 hover:text-cyan-300 mt-1.5 underline underline-offset-2">
+<span>Get Directions</span>
+<i data-lucide="external-link" class="w-3 h-3"></i>
+</a>
 </div>
 </div>
 </div>
@@ -696,8 +700,9 @@ For neuro-diagnostic procedure inquiries, physician referrals, or clinical repor
 </main>
 
 <!-- Footer -->
-<footer class="py-8 bg-[#01040b] border-t border-slate-800/80 text-center text-xs sm:text-sm text-slate-400 px-4">
-<p>© 2026 <strong class="text-slate-200">Ganesh Chandra Jena</strong> | Neuro Medical Technologist — Neuro Polyclinic, Bargarh, Odisha.</p>
+<footer class="py-8 bg-[#01040b] border-t border-slate-800/80 text-center text-xs sm:text-sm text-slate-400 px-4 space-y-2">
+<p>©️ 2026 <strong class="text-slate-200">Ganesh Chandra Jena</strong> | Neuro Medical Technologist — Neuro Polyclinic, Bargarh, Odisha.</p>
+<p class="text-[11px] font-mono text-slate-500">Disclaimer: Kindly correlate the results clinically. Reports are not valid for medico-legal purposes.</p>
 </footer>
 
 <script>
@@ -753,13 +758,13 @@ render();
 // 1. NCS CMAP Waveform
 initWaveform('canvasNCS', (x, step, height, centerY) => {
 let phase = (x + step) % 250;
-let y = centerY + Math.sin((x + step) * 0.04) * 4;
+let y = centerY;
 if (phase < 35) {
 let p = phase / 35;
-y -= Math.sin(p * Math.PI) * 22;
+y -= Math.sin(p * Math.PI) * 30;
 } else if (phase >= 35 && phase < 55) {
 let p = (phase - 35) / 20;
-y += Math.sin(p * Math.PI) * 12;
+y += Math.sin(p * Math.PI) * 20;
 }
 return y;
 }, '#38bdf8');
@@ -777,10 +782,7 @@ return y;
 
 // 3. EEG Rhythm Waveform
 initWaveform('canvasEEG', (x, step, height, centerY) => {
-let y = centerY + Math.sin((x + step) * 0.08) * 8 + Math.sin((x + step * 2) * 0.2) * 4;
-if (Math.floor((x + step) * 0.1) % 40 === 0) {
-y -= 16; // Spike artifact
-}
+let y = centerY + Math.sin((x + step) * 0.03) * 0 + Math.sin((x + step * 1) * 0.4) * 4;
 return y;
 }, '#38bdf8');
 
