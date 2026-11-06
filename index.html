@@ -68,7 +68,44 @@ background-color: #020617 !important;
 color: #f8fafc !important;
 font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 overflow-x: hidden;
+position: relative;
 }
+
+/* Interactive Animated Cursor Light Follower */
+#cursor-light {
+position: fixed;
+width: 450px;
+height: 450px;
+background: radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, rgba(2, 6, 23, 0) 70%);
+top: 0; left: 0;
+pointer-events: none;
+transform: translate(-50%, -50%);
+z-index: 9999;
+filter: blur(35px);
+transition: opacity 0.3s ease;
+opacity: 0;
+}
+body:hover #cursor-light { opacity: 1; }
+
+/* Floating Particles Background Grid */
+.particle-mesh {
+position: fixed;
+top: 0; left: 0; width: 100%; height: 100%;
+pointer-events: none;
+z-index: 1;
+background-image: 
+  radial-gradient(circle, rgba(56, 189, 248, 0.07) 1px, transparent 1px),
+  radial-gradient(circle, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+background-size: 45px 45px, 75px 75px;
+background-position: 0 0, 20px 35px;
+}
+
+/* Floating Animation */
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
 
 /* Ambient Medical Grid & Spotlight */
 .bg-clinical-mesh {
@@ -81,7 +118,7 @@ linear-gradient(to bottom, rgba(56, 189, 248, 0.045) 1px, transparent 1px);
 background-size: 100% 100%, 100% 100%, 34px 34px, 34px 34px;
 }
 
-/* Ultra-Clean Modern Card */
+/* Ultra-Clean Modern Card with Smooth Glow Hover */
 .modern-card {
 background: linear-gradient(155deg, #0d182f 0%, #060c1a 100%);
 border: 1px solid rgba(56, 189, 248, 0.22);
@@ -93,11 +130,11 @@ transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modern-card:hover {
-border-color: rgba(56, 189, 248, 0.55);
-transform: translateY(-4px);
+border-color: rgba(56, 189, 248, 0.6);
+transform: translateY(-6px);
 box-shadow:
-inset 0 1px 0 0 rgba(56, 189, 248, 0.3),
-0 22px 44px -12px rgba(14, 165, 233, 0.22);
+inset 0 1px 0 0 rgba(56, 189, 248, 0.35),
+0 24px 48px -12px rgba(14, 165, 233, 0.3);
 }
 
 /* Executive Featured Card */
@@ -154,6 +191,9 @@ width: 100%;
 </head>
 <body class="bg-neuro-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
 
+<div id="cursor-light"></div>
+<div class="particle-mesh"></div>
+
 <!-- Top Navigation -->
 <header class="sticky top-0 z-50 bg-[#040917]/95 backdrop-blur-md border-b border-slate-800/80">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -185,7 +225,7 @@ Contact
 </div>
 </header>
 
-<main>
+<main class="relative z-10">
 <!-- Hero Section -->
 <section class="relative pt-12 pb-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-clinical-mesh border-b border-slate-800/70">
 <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
@@ -193,7 +233,7 @@ Contact
 <!-- Left Column: Executive Introduction -->
 <div class="lg:col-span-7 space-y-7">
 <div class="space-y-3">
-<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gradient leading-[1.12]">
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gradient leading-[1.12] animate-float">
 Ganesh Chandra Jena
 </h1>
 <p class="text-lg sm:text-2xl font-bold text-gradient-cyan">
@@ -708,6 +748,15 @@ For neuro-diagnostic procedure inquiries, physician referrals, or clinical repor
 <script>
 lucide.createIcons();
 
+// Mouse Tracking Cursor Light Follower
+document.addEventListener('mousemove', (e) => {
+const light = document.getElementById('cursor-light');
+if (light) {
+light.style.left = e.clientX + 'px';
+light.style.top = e.clientY + 'px';
+}
+});
+
 // Setup Canvas Waveform Simulators for each Investigation Card
 function initWaveform(canvasId, drawFunc, strokeColor) {
 const canvas = document.getElementById(canvasId);
@@ -736,10 +785,12 @@ for (let y = 0; y < canvas.height; y += 18) {
 ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
 }
 
-// Draw wave
+// Draw wave with glow
 ctx.beginPath();
 ctx.strokeStyle = strokeColor;
-ctx.lineWidth = 2;
+ctx.lineWidth = 2.5;
+ctx.shadowBlur = 12;
+ctx.shadowColor = strokeColor;
 
 const centerY = canvas.height / 2;
 for (let x = 0; x < canvas.width; x++) {
@@ -749,7 +800,7 @@ else ctx.lineTo(x, y);
 }
 ctx.stroke();
 
-step += 1.5;
+step += 1.8;
 requestAnimationFrame(render);
 }
 render();
@@ -782,7 +833,7 @@ return y;
 
 // 3. EEG Rhythm Waveform
 initWaveform('canvasEEG', (x, step, height, centerY) => {
-let y = centerY + Math.sin((x + step) * 0.03) * 0 + Math.sin((x + step * 1) * 0.4) * 4;
+let y = centerY + Math.sin((x + step) * 0.00) * 9 + Math.sin((x + step * 1) * 0.3) * 4;
 return y;
 }, '#38bdf8');
 
